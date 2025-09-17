@@ -128,6 +128,13 @@ export class Service{
             throw error
         }
     }
+
+    getFilePreview(fileId){
+        return this.storage.appwriteBucketId(
+            config.appwriteBucketId,
+            fileId
+        )
+    }
 }
 
 const service = new Service()
