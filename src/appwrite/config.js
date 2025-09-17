@@ -31,7 +31,26 @@ export class Service{
             )
 
         }
-        catch {
+        catch (error) {
+            throw error
+        }
+    }
+
+    async updatePost(slug, {title, content, featuredImage, status}){
+        try {
+            return await this.databases.updateDocument(
+                config.appwriteDatabaseId,
+                slug,
+                {
+                    title,
+                    content,
+                    featuredImage,
+                    status,
+                }
+            )
+
+        }
+        catch (error){
             throw error
         }
     }
