@@ -71,6 +71,31 @@ export class Service{
 
     }
 
+    async getPost({slug}){
+        try {
+            return await this.databases.getPost(
+                config.appwriteDatabaseId,
+                slug,
+
+            )
+
+        }
+        catch (error) {
+            throw error
+        }
+    }
+
+
+    async listPost(queries = [Query.equal("status", "active")]){
+        try {
+            return await this.databases.listDocuments(
+                config.appwriteDatabaseId,
+                queries
+            )
+        } catch (error) {
+            return error
+        }
+    }
 }
 
 const service = new Service()
