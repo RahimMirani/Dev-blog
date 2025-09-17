@@ -55,7 +55,21 @@ export class Service{
         }
     }
 
+    async deletePost({slug}) {
+        try {
+            await this.databases.deletePost(
+                config.appwriteDatabaseId,
+                slug,
+                
+            )
+            return true
 
+        }
+        catch (error) {
+            throw error
+        }
+
+    }
 
 }
 
