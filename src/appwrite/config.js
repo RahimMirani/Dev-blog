@@ -96,6 +96,24 @@ export class Service{
             return error
         }
     }
+
+    //file upload service
+
+    async uploadFile(file){
+        try {
+            return await this.storage.createFile(
+                config.appwriteBucketId,
+                ID.unique,
+                file
+
+            )
+
+        } 
+        catch (error) {
+            return error
+        }
+
+    }
 }
 
 const service = new Service()
