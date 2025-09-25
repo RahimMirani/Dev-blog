@@ -1,13 +1,41 @@
+import { useEffect, useState } from 'react'
+import {useDispatch} from 'react-redux'
 import './App.css'
+import authservice from './appwrite/auth'
+import { login, logout } from './store/authSlice'
 
 function App() {
-  console.log(import.meta.env.VITE_APPWRITE_URL)
+  const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
 
-  return (
-    <>
-      <h1> Dev Blog </h1>
-    </>
-  )
-}
+  useEffect(() => {
+    authservice.getCurrentUser()
+    .then((userData) => {
+      if (userData) {
+        dispatch(login({userData}))
 
-export default App
+        } else {
+          dispatch(logout())
+        }
+      
+    })
+    .finally(() => setLoading(false))
+
+  }, [])
+
+
+
+ return ! loading ? (
+  <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+    <div className='w-full block'> 
+      <Header />
+      <main>
+        TODO
+      </main>
+      <Footer />
+    </div>
+  </div>
+ ) : null
+
+
+export default App()
